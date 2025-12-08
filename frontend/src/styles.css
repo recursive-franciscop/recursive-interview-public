@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+/* Basic, clean layout for the workout builder */
+
+:root {
+  --bg: #0f172a;           /* slate-900 */
+  --panel: #111827;        /* gray-900 */
+  --muted: #9ca3af;        /* gray-400 */
+  --text: #e5e7eb;         /* gray-200 */
+  --primary: #3b82f6;      /* blue-500 */
+  --primary-600: #2563eb;  /* blue-600 */
+  --danger: #ef4444;       /* red-500 */
+  --danger-600: #dc2626;   /* red-600 */
+  --border: #1f2937;       /* gray-800 */
+  --shadow: rgba(0,0,0,0.25);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0b1220 0%, #0f172a 100%);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.app {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 4px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  letter-spacing: 0.4px;
+}
+
+.status { display: flex; align-items: center; gap: 8px; }
+.badge {
+  display: inline-block;
+  padding: 4px 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.error {
+  color: var(--danger);
+  background: #2a0f12;
+  border: 1px solid #3a1a1d;
+  padding: 6px 10px;
+  border-radius: 6px;
+  max-width: 480px;
+  white-space: pre-wrap;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  flex: 1;
+  min-height: 0; /* allow children to overflow scroll */
+}
+
+@media (max-width: 900px) {
+  .content { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px var(--shadow);
+  padding: 16px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel h2, .panel h3 {
+  margin: 0 0 12px 0;
+  font-size: 20px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+@media (max-width: 900px) {
+  .filters { grid-template-columns: 1fr; }
+}
+
+.input {
+  width: 100%;
+  background: #0b1020;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 12px;
+  outline: none;
+}
+.input:focus {
+  border-color: #263658;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+}
+.input.small {
+  width: 120px;
+  padding: 8px 10px;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn {
+  background: #0b1020;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: 0.15s ease-in-out;
+}
+.btn:hover { border-color: #2a3a5f; }
+.btn.primary {
+  background: var(--primary);
+  border-color: var(--primary-600);
+  color: white;
+}
+.btn.primary:hover { background: var(--primary-600); }
+.btn.btn-danger {
+  background: var(--danger);
+  border-color: var(--danger-600);
+  color: white;
+}
+.btn.btn-danger:hover { background: var(--danger-600); }
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid var(--border);
+  background: #0b1020;
+  border-radius: 10px;
+  padding: 12px;
+}
+.title { font-weight: 600; }
+.sub { color: var(--muted); font-size: 12px; }
+
+.muted { color: var(--muted); padding: 8px 4px; }
+
+.builder { display: flex; flex-direction: column; gap: 12px; }
+.builder-items { display: grid; gap: 10px; }
+.builder-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #0b1020;
+  padding: 12px;
+}
+.builder-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.saved { margin-top: 16px; }
+
+/* Make saved workouts list fill panel and scroll */
+.panel.right .saved {
+  margin-top: 16px;
+  flex: 1;
+  min-height: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+.panel.right .saved .list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Make exercises list fill panel and scroll */
+.panel.left .list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.footer {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 12px;
+  text-align: center;
+}
