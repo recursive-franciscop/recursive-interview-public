@@ -23,6 +23,19 @@ A simple full-stack app to build custom workouts from a list of exercises.
 
 ---
 
+## Quick Start
+
+Makefile shortcuts:
+- First-time setup: make initi
+- Install dependencies: make install
+- Start backend (from venv): source .venv/bin/activate && make backend
+  - Or without activating venv: make backend UVICORN=.venv/bin/uvicorn
+- Start frontend: make frontend
+- Start both and watch: make dev (Ctrl+C to stop)
+- Stop any backgrounded dev procs: make stop
+
+--
+
 ## Backend Setup (FastAPI)
 
 1) Create and activate a virtual environment
@@ -42,14 +55,6 @@ A simple full-stack app to build custom workouts from a list of exercises.
 4) Verify it’s running
 - Health check: http://localhost:8000/api/health
 - API docs (Swagger UI): http://localhost:8000/docs
-
-Makefile shortcuts (optional):
-- First-time setup: make init
-- Start backend (from venv): source .venv/bin/activate && make backend
-  - Or without activating venv: make backend UVICORN=.venv/bin/uvicorn
-- Start frontend: make frontend
-- Start both and watch: make dev (Ctrl+C to stop)
-- Stop any backgrounded dev procs: make stop
 
 ### Configuration (.env)
 
@@ -140,26 +145,6 @@ Environment variable support (to be wired in during frontend scaffolding):
   curl -s http://localhost:8000/api/ai/chat \
     -H "Content-Type: application/json" \
     -d '{"prompt":"Say hello from the Workout Builder API","model":"gpt-4o-mini"}' | jq .
-
----
-
-## Typical Dev Workflow
-
-1) Start backend
-- uvicorn backend.main:app --reload --port 8000
-
-2) Start frontend (after it is scaffolded)
-- cd frontend
-- npm install
-- npm run dev
-- open http://localhost:5173
-
-3) Build your workout
-- Filter/search exercises
-- Add exercises to the workout
-- For strength: provide sets and reps
-- For cardio/mobility: provide duration_seconds
-- Save workout
 
 ---
 
