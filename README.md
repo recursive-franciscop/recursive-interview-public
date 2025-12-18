@@ -26,7 +26,7 @@ A simple full-stack app to build custom workouts from a list of exercises.
 ## Quick Start
 
 Makefile shortcuts:
-- First-time setup: make initi
+- First-time setup: make init
 - Install dependencies: make install
 - Start backend (from venv): source .venv/bin/activate && make backend
   - Or without activating venv: make backend UVICORN=.venv/bin/uvicorn
